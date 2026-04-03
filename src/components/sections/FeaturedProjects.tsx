@@ -1,0 +1,230 @@
+// src/components/sections/FeaturedProjects.tsx
+'use client'
+
+import { useState, useRef, useEffect } from 'react'
+import { motion } from 'framer-motion'
+import { featuredProjects } from '@/data/projects'
+import Image from 'next/image'
+import Link from 'next/link'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
+
+export default function FeaturedProjects() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [dotCount, setDotCount] = useState(0);
+
+  useEffect(() => {
+    const updateDots = () => {
+      const container = containerRef.current;
+      if (!container) return;
+      const card = container.firstElementChild as HTMLElement;
+      if (!card) return;
+      // Get exact width a card takes up during scroll (width + gap)
+      const cardWidth = card.clientWidth + 16; 
+      const maxScrollable = container.scrollWidth - container.clientWidth;
+      // How many full card shifts it takes to reach the end
+      const generatedDots = Math.max(1, Math.ceil(maxScrollable / cardWidth) + 1);
+      setDotCount(generatedDots);
+    };
+
+    updateDots();
+    // Allow layout to settle
+    const timeoutId = setTimeout(updateDots, 300);
+    window.addEventListener('resize', updateDots);
+    return () => {
+      clearTimeout(timeoutId);
+      window.removeEventListener('resize', updateDots);
+    };
+  }, []);
+
+  const handleScroll = () => {
+    if (containerRef.current) {
+      const scrollPosition = containerRef.current.scrollLeft;
+      const card = containerRef.current.firstElementChild as HTMLElement;
+      // Get the width of an exact single card for accurate dot tracking
+      const cardWidth = card ? card.clientWidth + 16 : containerRef.current.clientWidth / 2;
+      setCurrentSlide(Math.round(scrollPosition / cardWidth));
+    }
+  };
+
+  const scrollToSlide = (index: number) => {
+    if (containerRef.current) {
+      // Find the card element to get actual width instead of container width
+      const card = containerRef.current.firstElementChild as HTMLElement;
+      const slideWidth = card ? card.clientWidth + 16 : containerRef.current.clientWidth / 2; // +16 for gap
+      containerRef.current.scrollTo({
+        left: slideWidth * index,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  const nextSlide = () => {
+    if (currentSlide < dotCount - 1) scrollToSlide(currentSlide + 1);
+  };
+
+  const prevSlide = () => {
+    if (currentSlide > 0) scrollToSlide(currentSlide - 1);
+  };
+
+  return (
+    <section id="projects" className="relative z-10 w-full bg-transparent px-4 py-16 sm:py-20 lg:py-32 sm:px-6 lg:px-8 scroll-mt-12">
+      <div className="mx-auto max-w-7xl">
+        <div className="mb-20 flex flex-col justify-between md:flex-row md:items-end">
+          <div className="max-w-2xl">
+            <h2 className="mb-6 font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl">Worked Projects</h2>
+            <p className="text-xl text-slate-400">
+              A premium showcase of short films, cinematic campaigns, and creative direction.
+            </p>
+          </div>
+          <Link href="/projects" className="mt-8 shrink-0 rounded-full border border-slate-800 bg-slate-900/50 px-8 py-3 text-sm font-medium text-slate-300 backdrop-blur-sm transition-colors hover:bg-slate-800 md:mt-0 md:self-end">
+            View All Projects
+          </Link>
+        </div>
+
+        <div className="relative">
+          {/* Navigation Arrows for slider indicator */}
+          <button 
+            title="Previous Projects"
+            onClick={prevSlide}
+            disabled={currentSlide === 0}
+            className={`absolute left-0 top-[35%] -translate-y-1/2 -ml-0 lg:-ml-6 z-20 flex h-12 w-12 items-center justify-center rounded-full bg-slate-900 border border-slate-700 text-white backdrop-blur shadow-xl transition-all duration-300 ${currentSlide === 0 ? 'opacity-0 pointer-events-none' : 'opacity-100 hover:bg-slate-800 hover:scale-110 active:scale-95'}`}
+          >
+            <motion.div
+              animate={{ x: [0, -4, 0] }}
+              transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </motion.div>
+          </button>
+          
+          <button 
+            title="Next Projects"
+            onClick={nextSlide}
+            disabled={currentSlide >= dotCount - 1} // Disable completely when at end
+            className={`absolute right-0 top-[35%] -translate-y-1/2 -mr-0 lg:-mr-6 z-20 flex h-12 w-12 items-center justify-center rounded-full bg-slate-900 border border-slate-700 text-white backdrop-blur shadow-xl transition-all duration-300 ${(currentSlide >= dotCount - 1 && dotCount > 0) ? 'opacity-0 pointer-events-none' : 'opacity-100 hover:bg-slate-800 hover:scale-110 active:scale-95 hover:shadow-[0_0_20px_-5px_rgba(255,255,255,0.2)]'}`}
+          >
+            <motion.div
+              animate={{ x: [0, 4, 0] }}
+              transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+            >
+              <ChevronRight className="w-6 h-6" />
+            </motion.div>
+          </button>
+
+          <div 
+            ref={containerRef}
+            onScroll={handleScroll}
+            className="grid grid-rows-1 md:grid-rows-2 grid-flow-col auto-cols-[calc(50%-8px)] md:auto-cols-[calc(50%-12px)] overflow-x-auto overflow-y-visible pb-8 pt-4 snap-x snap-mandatory scrollbar-hide scroll-smooth gap-4 md:gap-x-6 md:gap-y-12 pr-16 md:pr-0"
+          >
+            {featuredProjects.map((project, index) => (
+              <div 
+                key={project.id} 
+                className="w-full shrink-0 snap-start flex flex-col h-full"
+              >
+                <Link href={`/projects/${project.id}`} className="group flex flex-col h-full">
+                  <motion.div
+                    className="relative flex flex-col gap-4 h-full"
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                  >
+                    <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-slate-900 border border-slate-800/50 transition-all duration-500 group-hover:border-blue-500/50 group-hover:shadow-[0_0_40px_-10px_rgba(59,130,246,0.4)]">
+                      {project.thumbnail ? (
+                        <Image
+                          src={project.thumbnail}
+                          alt={project.title}
+                          fill
+                          className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                        />
+                      ) : (
+                        <div className="absolute inset-0 flex items-center justify-center bg-slate-900/80">
+                          <span className="text-slate-600 text-xs sm:text-sm">Placeholder Image</span>
+                        </div>
+                      )}
+                      {/* Overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                    </div>
+                    
+                    <div className="flex flex-col gap-2">
+                      <div className="flex items-center gap-2 text-[10px] sm:text-xs font-medium uppercase tracking-wider text-slate-400">
+                        <span>{project.category}</span>
+                        <span className="h-1 w-1 rounded-full bg-slate-600" />
+                        <span>{project.year}</span>
+                      </div>
+                      <h3 className="font-serif text-lg sm:text-xl md:text-2xl transition-colors group-hover:text-slate-300">
+                        {project.title}
+                      </h3>
+                      <p className="line-clamp-2 max-w-xl text-xs sm:text-sm leading-relaxed text-slate-400">
+                        {project.description}
+                      </p>
+                      <div className="mt-auto pt-2 flex flex-wrap gap-1 sm:gap-2">
+                        {project.tags.slice(0, 3).map(tag => (
+                          <span key={tag} className="rounded-md bg-slate-900 px-2 py-1 text-[10px] sm:text-xs text-slate-300">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </motion.div>
+                </Link>
+              </div>
+            ))}
+
+            {/* CTA Final Slide */}
+            <div className="w-[calc(90vw)] sm:w-full h-full min-h-[30vh] md:min-h-0 md:row-span-2 shrink-0 snap-start flex flex-col items-center justify-center px-4" >
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="flex flex-col items-center justify-center text-center py-6 sm:py-8 md:p-12 px-6 rounded-3xl bg-slate-900/50 border border-slate-800 backdrop-blur-md w-full h-[80%] max-w-2xl"
+              >
+                <h3 className="text-3xl sm:text-4xl font-serif mb-6 text-white">Want to see more?</h3>
+                <p className="text-slate-400 mb-8 max-w-md mx-auto text-lg">
+                  Dive into behind-the-scenes, extended cuts, and daily updates on my social channels.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-6">
+                  <a href="https://instagram.com/amazer___" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 px-8 py-4 rounded-full bg-slate-800/80 border border-slate-700 text-slate-300 font-medium hover:text-white hover:bg-slate-700 hover:border-slate-500 hover:-translate-y-1  active:translate-y-0 active:scale-95 transition-all shadow-lg hover:shadow-cyan-900/20">
+                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    @amazer___
+                  </a>
+                  <a href="https://youtube.com/@amazer_r" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 px-8 py-4 rounded-full bg-slate-800/80 border border-slate-700 text-slate-300 font-medium hover:text-white hover:bg-slate-700 hover:border-slate-500 hover:-translate-y-1  active:translate-y-0 active:scale-95 transition-all shadow-lg hover:shadow-cyan-900/20">
+                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                    @amazer_r
+                  </a>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+
+          {/* Pagination Dots */}
+          <div className="flex items-center justify-center flex-wrap gap-2 mt-6 md:mt-12 px-4 max-w-[80vw] mx-auto">
+            {Array.from({ length: dotCount }).map((_, index) => (
+              <button
+                key={index}
+                onClick={() => scrollToSlide(index)}
+                aria-label={`Go to slide ${index + 1}`}
+                className={`h-2 rounded-full transition-all duration-300 flex-shrink-0 ${
+                  currentSlide === index 
+                    ? 'w-6 sm:w-8 bg-white' 
+                    : 'w-2 bg-slate-600 hover:bg-slate-400'
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+      <style dangerouslySetInnerHTML={{__html: `
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      `}} />
+    </section>
+  )
+}
