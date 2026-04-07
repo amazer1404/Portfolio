@@ -85,6 +85,29 @@ const blogs: BlogPost[] = [
         </p>
       </div>
     )
+  },
+  {
+    id: "7",
+    title: "The Intersection of AI, VFX, and CGI",
+    category: "Technology & Art",
+    preview: "Exploring how Artificial Intelligence is reshaping the landscape of Visual Effects and CGI, and what it means for the future of digital storytelling.",
+    date: "April 7, 2026",
+    readTime: "3 min read",
+    image: "/images/gallery/cards/post4.png",
+    linkedinLink: "https://www.linkedin.com/posts/karan-pawar-21680b290_ai-vfx-cgi-ugcPost-7447209237044293633-XQAb?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEaZa3IBIg8v53YHH5VfjuhJH563InO3QVU",
+    content: (
+      <div className="space-y-6 text-slate-300">
+        <p>
+          The boundaries between traditional filmmaking and generated media are blurring faster than ever. What used to take days of rendering and manual tracking in VFX pipelines can now sometimes be achieved in a fraction of the time with AI-driven tools.
+        </p>
+        <p>
+          But the rise of AI in CGI isn't just about speed; it's about democratizing the tools of imagination. Independent creators now have access to visual capabilities that were previously locked behind massive studio budgets.
+        </p>
+        <p>
+          However, the core of visual effects will always remain the same: serving the story. The tools change, but the artistic intent—the "why" behind every pixel—is what ultimately determines the impact of the visual.
+        </p>
+      </div>
+    )
   }
 ];
 
