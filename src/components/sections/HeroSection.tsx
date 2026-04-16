@@ -98,13 +98,12 @@ export default function HeroSection() {
             View Projects
           </a>
           <a
-            href="/resume.pdf"
-            download="Karan_Pawar_Resume.pdf"
+            href="https://drive.google.com/file/d/1-PBrprgHWg8MloTDaAShBw-P77_0NFtG/view?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
             className="group flex w-full sm:w-auto sm:min-w-[180px] items-center justify-center gap-2 rounded-full border border-slate-700 bg-slate-900/40 px-6 py-3 text-xs sm:text-sm sm:px-8 sm:py-4 font-semibold tracking-wider text-slate-200 backdrop-blur-md transition-all active:scale-95 duration-200 hover:bg-slate-800 hover:border-slate-500 hover:text-white hover:shadow-[0_0_20px_-5px_rgba(255,255,255,0.1)]"
           >
-            Download Resume
+            View Resume
           </a>
           <a
             href="#contact" onClick={handleScrollToContact}
