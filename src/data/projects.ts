@@ -11,6 +11,16 @@ export const featuredProjects = [
     tags: ["Director", "Editor", "AI Visuals", "Sound Design"],
   },
   {
+    id: "honest-hostels",
+    title: "Honest Hostels",
+    category: "Comedy Sketch / Writing Project",
+    year: "2026",
+    role: "Scriptwriter, Editor",
+    description: "A satire-based comedy project inspired by AIB style sketches, exposing relatable hostel struggles students face in college. Focused mainly on scriptwriting, humour, Hinglish dialogues, comedic timing, and fast-paced editing.",
+    thumbnail: "https://img.youtube.com/vi/IvqAgaYm71U/maxresdefault.jpg",
+    tags: ["Scriptwriting", "Comedy", "Satire", "Editor", "Content Creation"],
+  },
+  {
     id: "munja",
     title: "MUNJYA",
     category: "Psychological Horror Reel",
