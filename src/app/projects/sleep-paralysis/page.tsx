@@ -188,7 +188,7 @@ export default function SleepParalysisProjectPage() {
             <h2 className="text-3xl md:text-5xl font-serif text-slate-200 mb-4">Trapped</h2>
           </motion.div>
 
-          <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6 px-2">
+          <div className="columns-2 sm:columns-2 lg:columns-3 gap-2 md:gap-6 space-y-2 md:space-y-6 px-2">
             {galleryImages.map((imgSrc, idx) => (
               <motion.div 
                 key={idx}

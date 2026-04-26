@@ -23,7 +23,7 @@ export default function PhotoGallery({ images }: PhotoGalleryProps) {
 
         {/* Masonry Layout with Mobile/Tablet Collapse */}
         <div className={`relative transition-all duration-700 ease-in-out ${!isExpanded ? 'max-h-[800px] sm:max-h-[1000px] lg:max-h-none overflow-hidden' : ''}`}>
-          <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 md:gap-6 space-y-4 md:space-y-6">
+          <div className="columns-2 sm:columns-2 lg:columns-3 xl:columns-4 gap-2 md:gap-6 space-y-2 md:space-y-6">
             {images.map((src, i) => (
               <div
                 key={src}
