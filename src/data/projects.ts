@@ -14,7 +14,7 @@ export const featuredProjects = [
     id: "honest-hostels",
     title: "Honest Hostels",
     category: "Comedy Sketch / Writing Project",
-    year: "2026",
+    year: "2025",
     role: "Scriptwriter, Editor",
     description: "A satire-based comedy project inspired by AIB style sketches, exposing relatable hostel struggles students face in college. Focused mainly on scriptwriting, humour, Hinglish dialogues, comedic timing, and fast-paced editing.",
     thumbnail: "https://img.youtube.com/vi/IvqAgaYm71U/maxresdefault.jpg",
