@@ -123,7 +123,7 @@ export default function FeaturedProjects() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.35 }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"
+            className="flex w-full gap-3 overflow-x-auto snap-x snap-mandatory pb-3 scrollbar-hide sm:grid sm:grid-cols-2 sm:overflow-visible sm:pb-0 lg:grid-cols-3 sm:gap-4 md:gap-6"
           >
             {categoryVideos
               .filter(video => video.categories.includes(selectedCategory))
@@ -133,7 +133,7 @@ export default function FeaturedProjects() {
                   initial={{ opacity: 0, y: 18 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.45, delay: index * 0.07 }}
-                  className="relative aspect-[9/16] sm:aspect-video overflow-hidden rounded-xl border border-slate-800/60 bg-slate-900 shadow-xl"
+                  className="relative aspect-video w-[82vw] max-w-[280px] shrink-0 snap-start overflow-hidden rounded-xl border border-slate-800/60 bg-slate-900 shadow-xl sm:w-auto sm:max-w-none sm:shrink sm:snap-none"
                 >
                   {playingVideo === video.id ? (
                     <iframe

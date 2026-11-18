@@ -68,7 +68,7 @@ export default function AllProjectsPage() {
         </div>
 
         {(selectedCategory === 'AI Videos' || selectedCategory === 'Clients & Assignments') ? (
-          <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+          <motion.div layout className="flex w-full gap-3 overflow-x-auto snap-x snap-mandatory pb-3 scrollbar-hide sm:grid sm:grid-cols-2 sm:overflow-visible sm:pb-0 lg:grid-cols-3 sm:gap-4 md:gap-6">
             {categoryVideos
               .filter(video => video.categories.includes(selectedCategory))
               .map((video, index) => (
@@ -77,7 +77,7 @@ export default function AllProjectsPage() {
                   initial={{ opacity: 0, y: 18 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.45, delay: index * 0.07 }}
-                  className="relative aspect-[9/16] sm:aspect-video overflow-hidden rounded-xl border border-slate-800/60 bg-slate-900"
+                  className="relative aspect-video w-[82vw] max-w-[280px] shrink-0 snap-start overflow-hidden rounded-xl border border-slate-800/60 bg-slate-900 sm:w-auto sm:max-w-none sm:shrink sm:snap-none"
                 >
                   {playingVideo === video.id ? (
                     <iframe
