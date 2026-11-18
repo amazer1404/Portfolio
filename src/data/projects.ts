@@ -8,6 +8,7 @@ export const workCategories = [
 ] as const;
 
 export const categoryVideos = [
+  { id: 'p-W7oPDidTY', title: 'AI / Creative Short', categories: ['AI Videos'] },
   { id: 'qH489JhCSbU', title: 'AI / Creative Short', categories: ['AI Videos'] },
   { id: 't_MGLkOKaaU', title: 'AI / Creative Short', categories: ['AI Videos'] },
   { id: 'uoxhD31uU_I', title: 'AI / Creative Short', categories: ['AI Videos'] },
