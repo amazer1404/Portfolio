@@ -175,7 +175,7 @@ export default function MindAndObservations() {
                 </div>
 
                 {/* Subtle Grain Overlay */}
-                <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-700 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] blend-overlay" />
+                <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-700 bg-[linear-gradient(135deg,rgba(255,255,255,0.16)_1px,transparent_1px)] bg-[size:5px_5px] mix-blend-overlay" />
                 
                 {/* Glow Effect */}
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
