@@ -3,7 +3,7 @@
 
 import { useState, useRef, useEffect, useMemo } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { featuredProjects, workCategories } from '@/data/projects'
+import { featuredProjects, workCategories, categoryVideos } from '@/data/projects'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
@@ -13,6 +13,7 @@ export default function FeaturedProjects() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [dotCount, setDotCount] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState<(typeof workCategories)[number]>('All Works');
+  const [playingVideo, setPlayingVideo] = useState<string | null>(null);
 
   const filteredProjects = useMemo(() => {
     if (selectedCategory === 'All Works') return featuredProjects;
@@ -85,9 +86,9 @@ export default function FeaturedProjects() {
       <div className="mx-auto max-w-7xl">
         <div className="mb-20 flex flex-col justify-between md:flex-row md:items-end">
           <div className="max-w-2xl">
-            <h2 className="mb-6 font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl">SELECTED WORKS</h2>
+            <h2 className="mb-6 font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl">MY KARMA.</h2>
             <p className="text-xl text-slate-400">
-              Different stories. Different mediums. One creative mind.
+              A little piece of everything I've imagined, written and brought to life.
             </p>
           </div>
           <Link href="/projects" className="mt-8 shrink-0 rounded-full border border-slate-800 bg-slate-900/50 px-8 py-3 text-sm font-medium text-slate-300 backdrop-blur-sm transition-colors hover:bg-slate-800 md:mt-0 md:self-end">
@@ -95,18 +96,20 @@ export default function FeaturedProjects() {
           </Link>
         </div>
 
-        <div className="mb-10 flex justify-start overflow-x-auto pb-2 scrollbar-hide" aria-label="Project categories">
-          <div className="flex shrink-0 items-center gap-2 rounded-full border border-slate-800/70 bg-slate-950/40 p-1.5 backdrop-blur-sm">
+        <div className="mb-10 flex w-full justify-center" aria-label="Project categories">
+          <div className="grid w-full grid-cols-2 gap-2 rounded-xl border border-slate-800/70 bg-slate-950/40 p-2 backdrop-blur-sm md:flex md:w-auto md:items-center md:justify-center md:gap-1.5 md:rounded-full md:p-1.5">
             {workCategories.map(category => (
               <button
                 key={category}
                 type="button"
                 onClick={() => setSelectedCategory(category)}
                 aria-pressed={selectedCategory === category}
-                className={`whitespace-nowrap rounded-full px-4 py-2 text-xs font-medium transition-all duration-300 sm:px-5 sm:text-sm ${
+                className={`min-h-10 min-w-0 rounded-lg px-2 py-2 text-center text-xs font-medium leading-tight transition-all duration-300 md:rounded-full md:px-3 lg:px-4 md:text-sm ${
+                  category === 'All Works' ? 'col-span-2 md:col-span-1' : ''
+                } ${
                   selectedCategory === category
                     ? 'bg-slate-100 text-slate-950 shadow-[0_4px_18px_rgba(226,232,240,0.12)]'
-                    : 'text-slate-400 hover:bg-slate-800/70 hover:text-slate-200'
+                    : 'bg-slate-900/30 text-slate-400 hover:bg-slate-800/70 hover:text-slate-200'
                 }`}
               >
                 {category}
@@ -115,6 +118,53 @@ export default function FeaturedProjects() {
           </div>
         </div>
 
+        {(selectedCategory === 'AI Videos' || selectedCategory === 'Clients & Assignments') ? (
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.35 }}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"
+          >
+            {categoryVideos
+              .filter(video => video.categories.includes(selectedCategory))
+              .map((video, index) => (
+                <motion.div
+                  key={video.id}
+                  initial={{ opacity: 0, y: 18 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.45, delay: index * 0.07 }}
+                  className="relative aspect-[9/16] sm:aspect-video overflow-hidden rounded-xl border border-slate-800/60 bg-slate-900 shadow-xl"
+                >
+                  {playingVideo === video.id ? (
+                    <iframe
+                      src={`https://www.youtube.com/embed/${video.id}?autoplay=1&rel=0&modestbranding=1&playsinline=1`}
+                      className="absolute inset-0 h-full w-full border-0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                      title={video.title}
+                    />
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => setPlayingVideo(video.id)}
+                      className="group absolute inset-0 flex items-center justify-center focus:outline-none"
+                      aria-label={`Play ${video.title}`}
+                    >
+                      <img
+                        src={`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`}
+                        alt={video.title}
+                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                      />
+                      <span className="absolute inset-0 bg-slate-950/10 transition-colors group-hover:bg-slate-950/25" />
+                      <span className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full border border-white/20 bg-black/40 backdrop-blur-sm transition-transform duration-300 group-hover:scale-110">
+                        <svg className="ml-1 h-7 w-7 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+                      </span>
+                    </button>
+                  )}
+                </motion.div>
+              ))}
+          </motion.div>
+        ) : (
         <div className="relative">
           {/* Navigation Arrows for slider indicator */}
           <button 
@@ -256,6 +306,7 @@ export default function FeaturedProjects() {
             ))}
           </div>
         </div>
+        )}
       </div>
       <style dangerouslySetInnerHTML={{__html: `
         .scrollbar-hide::-webkit-scrollbar {

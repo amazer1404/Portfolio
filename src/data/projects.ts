@@ -4,8 +4,17 @@ export const workCategories = [
   'AI Videos',
   'Short Films & Sketches',
   'Visual Feasts',
-  'Client Work'
+  'Clients & Assignments'
 ] as const;
+
+export const categoryVideos = [
+  { id: 'qH489JhCSbU', title: 'AI / Creative Short', categories: ['AI Videos'] },
+  { id: 'Kq2Y4Md2p_E', title: 'Client / Creative Short', categories: ['Clients & Assignments'] },
+  { id: 'UPmS23p0gMs', title: 'Client Assignment', categories: ['Clients & Assignments'] },
+  { id: 'tDebhbVO7Fk', title: 'Client Short', categories: ['Clients & Assignments'] },
+  { id: 'yD0SkNd8Xp0', title: 'Client Assignment', categories: ['Clients & Assignments'] },
+  { id: 'YxNqsOOL2kY', title: 'Client Short', categories: ['Clients & Assignments'] }
+];
 
 export const featuredProjects = [
   {
