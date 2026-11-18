@@ -10,6 +10,8 @@ export const workCategories = [
 export const categoryVideos = [
   { id: 'qH489JhCSbU', title: 'AI / Creative Short', categories: ['AI Videos'] },
   { id: 't_MGLkOKaaU', title: 'AI / Creative Short', categories: ['AI Videos'] },
+  { id: 'uoxhD31uU_I', title: 'AI / Creative Short', categories: ['AI Videos'] },
+  { id: 'a7bXoFpnl-8', title: 'AI / Creative Short', categories: ['AI Videos'] },
   { id: 'Kq2Y4Md2p_E', title: 'Client / Creative Short', categories: ['Clients & Assignments'] },
   { id: 'UPmS23p0gMs', title: 'Client Assignment', categories: ['Clients & Assignments'] },
   { id: 'tDebhbVO7Fk', title: 'Client Short', categories: ['Clients & Assignments'] },
