@@ -1,5 +1,24 @@
 // src/data/projects.ts
+export const workCategories = [
+  'All Works',
+  'AI Videos',
+  'Short Films & Sketches',
+  'Visual Feasts',
+  'Client Work'
+] as const;
+
 export const featuredProjects = [
+  {
+    id: "shiuli-the-october-story",
+    workCategory: "Short Films & Sketches",
+    title: "SHIULI – The October Story",
+    category: "Short Film | Romance | Drama",
+    year: "2026",
+    role: "Writer, Director, Editor",
+    description: "An emotionally engaging romantic short film built from an original story and screenplay I conceptualised and wrote. Its almost dialogue-free narrative translates love, memory, and loss into visual storytelling, concluding with one meaningful line.",
+    thumbnail: "/images/gallery/shiuli-the-october-story/WhatsApp Image 2026-11-06 at 1.57.48 PM.jpeg",
+    tags: ["Story Writing", "Screenwriting", "Scriptwriting", "Narrative Development", "Visual Storytelling", "Direction", "Video Editing", "Cinematography", "Creative Direction"],
+  },
   {
     id: "the-quiet-quit",
     title: "The Quiet Quit",
@@ -9,9 +28,11 @@ export const featuredProjects = [
     description: "Led end-to-end production of a multi-episode cinematic reel series, handling scripting, direction, editing, sound design, AI-assisted visuals, and promotional trailer creation.",
     thumbnail: "/images/gallery/the-quiet-quit/cover_image.png", 
     tags: ["Director", "Editor", "AI Visuals", "Sound Design"],
+    workCategory: "Short Films & Sketches",
   },
   {
     id: "honest-hostels",
+    workCategory: "Short Films & Sketches",
     title: "Honest Hostels",
     category: "Comedy Sketch / Writing Project",
     year: "2025",
@@ -29,9 +50,11 @@ export const featuredProjects = [
     description: "A highly personal psychological horror reel inspired by real experiences. Engineered with calculated pacing, AI+Live-Action compositing, and unsettling sound design.",
     thumbnail: "/images/gallery/munja/cover_image.png",
     tags: ["Director", "Editor", "AI Visuals", "Sound Design", "Acting"],
+    workCategory: "Short Films & Sketches",
   },
   {
     id: "rundown",
+    workCategory: "Visual Feasts",
     title: "Rundown",
     category: "Action Reel",
     year: "2026",
@@ -42,6 +65,7 @@ export const featuredProjects = [
   },
   {
     id: "sleep-paralysis",
+    workCategory: "Short Films & Sketches",
     title: "Sleep Paralysis",
     category: "Psychological Horror Short Film",
     year: "2025",
@@ -52,6 +76,7 @@ export const featuredProjects = [
   },
   {
     id: "lovely",
+    workCategory: "Visual Feasts",
     title: "Lovely",
     category: "Contemporary Dance Film",
     year: "2026",
@@ -62,6 +87,7 @@ export const featuredProjects = [
   },
   {
     id: "estes",
+    workCategory: "Short Films & Sketches",
     title: "Estes",
     category: "Horror Short Film",
     year: "2024",
@@ -72,6 +98,7 @@ export const featuredProjects = [
   },
   {
     id: "radha",
+    workCategory: "Visual Feasts",
     title: "Radha",
     category: "Cinematic Devotional Reel",
     year: "2026",
@@ -82,6 +109,7 @@ export const featuredProjects = [
   },
   {
     id: "kumba",
+    workCategory: "Visual Feasts",
     title: "Kumba",
     category: "Music Visual",
     year: "2026",

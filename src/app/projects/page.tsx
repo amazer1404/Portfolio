@@ -1,14 +1,20 @@
 'use client';
 
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowLeft } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { featuredProjects } from '@/data/projects';
+import { featuredProjects, workCategories } from '@/data/projects';
 import BackToTop from '@/components/ui/BackToTop';
 
 export default function AllProjectsPage() {
+  const [selectedCategory, setSelectedCategory] = useState<(typeof workCategories)[number]>('All Works');
+  const filteredProjects = useMemo(() => {
+    if (selectedCategory === 'All Works') return featuredProjects;
+    return featuredProjects.filter(project => project.workCategory === selectedCategory);
+  }, [selectedCategory]);
+
   return (
     <div className="relative min-h-screen bg-[#050505] text-slate-100 selection:bg-blue-900/30 pt-24 px-4 sm:px-6 lg:px-8 pb-32">
       <div className="fixed inset-0 z-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:120px_120px] pointer-events-none" />
@@ -38,8 +44,28 @@ export default function AllProjectsPage() {
           <p className="mt-4 text-slate-400 text-lg">A complete archive of all short films, creative reels, and visual experiments.</p>
         </motion.div>
 
-        <div className="flex flex-col gap-6">
-          {featuredProjects.map((project, index) => (
+        <div className="mb-8 flex overflow-x-auto pb-2 scrollbar-hide" aria-label="Project categories">
+          <div className="flex shrink-0 items-center gap-2 rounded-full border border-slate-800/70 bg-slate-950/40 p-1.5 backdrop-blur-sm">
+            {workCategories.map(category => (
+              <button
+                key={category}
+                type="button"
+                onClick={() => setSelectedCategory(category)}
+                aria-pressed={selectedCategory === category}
+                className={`whitespace-nowrap rounded-full px-4 py-2 text-xs font-medium transition-all duration-300 sm:px-5 sm:text-sm ${
+                  selectedCategory === category
+                    ? 'bg-slate-100 text-slate-950 shadow-[0_4px_18px_rgba(226,232,240,0.12)]'
+                    : 'text-slate-400 hover:bg-slate-800/70 hover:text-slate-200'
+                }`}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <motion.div layout className="flex flex-col gap-6">
+          {filteredProjects.map((project, index) => (
             <Link href={`/projects/${project.id}`} key={project.id}>
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
@@ -92,7 +118,7 @@ export default function AllProjectsPage() {
               </motion.div>
             </Link>
           ))}
-        </div>
+        </motion.div>
       </div>
       
       <BackToTop />

@@ -1,9 +1,9 @@
 // src/components/sections/FeaturedProjects.tsx
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
-import { motion } from 'framer-motion'
-import { featuredProjects } from '@/data/projects'
+import { useState, useRef, useEffect, useMemo } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { featuredProjects, workCategories } from '@/data/projects'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
@@ -12,8 +12,21 @@ export default function FeaturedProjects() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [dotCount, setDotCount] = useState(0);
+  const [selectedCategory, setSelectedCategory] = useState<(typeof workCategories)[number]>('All Works');
+
+  const filteredProjects = useMemo(() => {
+    if (selectedCategory === 'All Works') return featuredProjects;
+    return featuredProjects.filter(project =>
+      project.workCategory === selectedCategory
+    );
+  }, [selectedCategory]);
 
   useEffect(() => {
+    if (containerRef.current) {
+      containerRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+    }
+    setCurrentSlide(0);
+
     const updateDots = () => {
       const container = containerRef.current;
       if (!container) return;
@@ -35,7 +48,7 @@ export default function FeaturedProjects() {
       clearTimeout(timeoutId);
       window.removeEventListener('resize', updateDots);
     };
-  }, []);
+  }, [filteredProjects.length]);
 
   const handleScroll = () => {
     if (containerRef.current) {
@@ -72,14 +85,34 @@ export default function FeaturedProjects() {
       <div className="mx-auto max-w-7xl">
         <div className="mb-20 flex flex-col justify-between md:flex-row md:items-end">
           <div className="max-w-2xl">
-            <h2 className="mb-6 font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl">Worked Projects</h2>
+            <h2 className="mb-6 font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl">SELECTED WORKS</h2>
             <p className="text-xl text-slate-400">
-              A premium showcase of short films, cinematic campaigns, and creative direction.
+              Different stories. Different mediums. One creative mind.
             </p>
           </div>
           <Link href="/projects" className="mt-8 shrink-0 rounded-full border border-slate-800 bg-slate-900/50 px-8 py-3 text-sm font-medium text-slate-300 backdrop-blur-sm transition-colors hover:bg-slate-800 md:mt-0 md:self-end">
             View All Projects
           </Link>
+        </div>
+
+        <div className="mb-10 flex justify-start overflow-x-auto pb-2 scrollbar-hide" aria-label="Project categories">
+          <div className="flex shrink-0 items-center gap-2 rounded-full border border-slate-800/70 bg-slate-950/40 p-1.5 backdrop-blur-sm">
+            {workCategories.map(category => (
+              <button
+                key={category}
+                type="button"
+                onClick={() => setSelectedCategory(category)}
+                aria-pressed={selectedCategory === category}
+                className={`whitespace-nowrap rounded-full px-4 py-2 text-xs font-medium transition-all duration-300 sm:px-5 sm:text-sm ${
+                  selectedCategory === category
+                    ? 'bg-slate-100 text-slate-950 shadow-[0_4px_18px_rgba(226,232,240,0.12)]'
+                    : 'text-slate-400 hover:bg-slate-800/70 hover:text-slate-200'
+                }`}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
         </div>
 
         <div className="relative">
@@ -117,9 +150,16 @@ export default function FeaturedProjects() {
             onScroll={handleScroll}
             className="grid grid-rows-1 md:grid-rows-2 grid-flow-col auto-cols-[calc(50%-8px)] md:auto-cols-[calc(50%-12px)] overflow-x-auto overflow-y-visible pb-8 pt-4 snap-x snap-mandatory scrollbar-hide scroll-smooth gap-4 md:gap-x-6 md:gap-y-12 pr-16 md:pr-0"
           >
-            {featuredProjects.map((project, index) => (
-              <div 
-                key={project.id} 
+            <AnimatePresence mode="popLayout">
+            {filteredProjects.map((project, index) => (
+              <motion.div
+                layout
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.35, ease: 'easeOut' }}
+                key={project.id}
+                
                 className="w-full shrink-0 snap-start flex flex-col h-full"
               >
                 <Link href={`/projects/${project.id}`} className="group flex flex-col h-full">
@@ -169,8 +209,9 @@ export default function FeaturedProjects() {
                     </div>
                   </motion.div>
                 </Link>
-              </div>
+              </motion.div>
             ))}
+            </AnimatePresence>
 
             {/* CTA Final Slide */}
             <div className="w-[calc(90vw)] sm:w-full h-full min-h-[30vh] md:min-h-0 md:row-span-2 shrink-0 snap-start flex flex-col items-center justify-center px-4" >
