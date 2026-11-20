@@ -61,10 +61,10 @@ export default function ReelsShowcase() {
     <section id="reels" className="relative z-10 w-full overflow-hidden bg-transparent px-4 py-16 sm:py-20 lg:py-32 sm:px-6 lg:px-8 scroll-mt-12">
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-col items-center mb-16 text-center">
-          <h2 className="mb-6 font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-slate-100 tracking-tight">
+          <h2 className="editorial-heading-centered mb-6 font-serif font-editorial editorial-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-tight">
             Cinematic Reels
           </h2>
-          <div className="h-1 w-24 bg-gradient-to-r from-teal-500 to-emerald-500 rounded-full mb-6"></div>
+          <div className="mb-6 h-px w-12 rounded-full bg-[#C47791]/70"></div>
           <p className="text-xl text-slate-300 max-w-2xl font-light leading-relaxed mb-6">
             Short-form content crafted with cinematic pacing, precise audio, and strong emotional pulls.
           </p>
@@ -75,7 +75,7 @@ export default function ReelsShowcase() {
             title="Previous Reels"
             onClick={prevSlide}
             disabled={currentSlide === 0}
-            className={`absolute left-0 top-1/2 -translate-y-1/2 -ml-2 lg:-ml-6 z-20 flex h-12 w-12 items-center justify-center rounded-full bg-slate-900 border border-slate-700 text-white backdrop-blur shadow-xl transition-all duration-300 ${currentSlide === 0 ? 'opacity-0 pointer-events-none' : 'opacity-100 hover:bg-slate-800 hover:scale-110 active:scale-95'}`}
+            className={`absolute left-0 top-1/2 -translate-y-1/2 -ml-2 lg:-ml-6 z-20 flex h-12 w-12 items-center justify-center rounded-full bg-[#B85C78] border border-[#D18BA2]/25 text-white backdrop-blur shadow-xl transition-all duration-300 ${currentSlide === 0 ? 'opacity-0 pointer-events-none' : 'opacity-100 hover:bg-[#C47791] hover:border-[#F3E4E9]/40 hover:scale-110 active:scale-95'}`}
           >
             <motion.div
               animate={{ x: [0, -4, 0] }}
@@ -89,7 +89,7 @@ export default function ReelsShowcase() {
             title="Next Reels"
             onClick={nextSlide}
             disabled={currentSlide === reels.length}
-            className={`absolute right-0 top-1/2 -translate-y-1/2 -mr-2 lg:-mr-6 z-20 flex h-12 w-12 items-center justify-center rounded-full bg-slate-900 border border-slate-700 text-white backdrop-blur shadow-xl transition-all duration-300 ${currentSlide === reels.length ? 'opacity-0 pointer-events-none' : 'opacity-100 hover:bg-slate-800 hover:scale-110 active:scale-95'}`}
+            className={`absolute right-0 top-1/2 -translate-y-1/2 -mr-2 lg:-mr-6 z-20 flex h-12 w-12 items-center justify-center rounded-full bg-[#B85C78] border border-[#D18BA2]/25 text-white backdrop-blur shadow-xl transition-all duration-300 ${currentSlide === reels.length ? 'opacity-0 pointer-events-none' : 'opacity-100 hover:bg-[#C47791] hover:border-[#F3E4E9]/40 hover:scale-110 active:scale-95'}`}
           >
             <motion.div
               animate={{ x: [0, 4, 0] }}

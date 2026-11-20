@@ -21,9 +21,9 @@ export default function WorkExperience() {
     }
   ]
   return (
-    <section id="experience" className="relative z-10 w-full bg-transparent px-4 py-16 sm:py-20 lg:py-32 sm:px-6 lg:px-8 bg-slate-900/10 scroll-mt-12">
+    <section id="experience" className="brand-section-frame relative z-10 w-full bg-transparent px-4 py-16 sm:py-20 lg:py-32 sm:px-6 lg:px-8 bg-slate-900/10 scroll-mt-12">
       <div className="mx-auto max-w-7xl">
-        <h2 className="mb-16 font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-slate-100">Work Experience</h2>
+        <h2 className="editorial-heading-rule mb-16 font-serif font-editorial editorial-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl">Work Experience</h2>
         
         <div className="flex flex-col gap-12 border-l border-slate-800 pb-8 pl-8 mx-auto max-w-4xl pt-8">
           {experiences.map((exp, i) => (

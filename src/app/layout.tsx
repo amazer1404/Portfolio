@@ -1,8 +1,14 @@
-import { Inter } from 'next/font/google'
+import { Cormorant_Garamond, Inter } from 'next/font/google'
 import './globals.css'
 import type { Metadata } from 'next'
 
 const inter = Inter({ subsets: ['latin'] })
+const cormorantGaramond = Cormorant_Garamond({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  display: 'swap',
+  variable: '--font-cormorant',
+})
 
 export const metadata: Metadata = {
   title: 'Karan Pawar | Creative Director & Filmmaker',
@@ -16,7 +22,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark scroll-smooth">
-      <body className={`${inter.className} bg-black text-gray-100 antialiased`}>
+      <body className={`${inter.className} ${cormorantGaramond.variable} bg-black text-gray-100 antialiased`}>
         {children}
       </body>
     </html>

@@ -72,15 +72,15 @@ export default function HeroSection() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: 'easeOut' }}
       >
-        <span className="mb-4 inline-block rounded-full border border-slate-800 bg-slate-900/30 px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-slate-400 backdrop-blur-sm">
+        <span className="mb-4 inline-block rounded-full border border-[#B85C78]/35 bg-slate-900/30 px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-[#D18BA2] backdrop-blur-sm">
           Creative Director / Filmmaker
         </span>
 
         <div className="mb-8 flex flex-col items-center justify-center gap-1 sm:gap-2">
-          <h1 className="font-serif text-5xl font-medium leading-[1.1] tracking-tight sm:text-6xl md:text-7xl lg:text-8xl text-slate-50 drop-shadow-sm">
+          <h1 className="font-serif font-editorial editorial-heading text-5xl font-medium leading-[1.1] tracking-tight sm:text-6xl md:text-7xl lg:text-8xl drop-shadow-sm">
             Karan Pawar
           </h1>
-          <span className="mt-2 text-sm font-medium uppercase tracking-[0.3em] text-blue-400/80 sm:mt-0 sm:text-lg">
+          <span className="mt-2 text-sm font-medium uppercase tracking-[0.3em] text-[#D18BA2] sm:mt-0 sm:text-lg">
             aka AMAZER
           </span>
         </div>
@@ -93,7 +93,7 @@ export default function HeroSection() {
           <a
             href="#projects"
             onClick={handleScrollToProjects}
-            className="group flex w-full sm:w-auto sm:min-w-[180px] items-center justify-center gap-2 rounded-full border border-blue-500/40 bg-blue-900/20 px-6 py-3 text-xs sm:text-sm sm:px-8 sm:py-4 font-semibold tracking-wider text-blue-100 backdrop-blur-md transition-all active:scale-95 duration-200 hover:bg-blue-800/30 hover:border-blue-400 hover:text-white hover:shadow-[0_0_25px_-5px_rgba(59,130,246,0.3)] shadow-[0_0_15px_-5px_rgba(59,130,246,0.2)]"
+            className="group flex w-full sm:w-auto sm:min-w-[180px] items-center justify-center gap-2 rounded-full border border-[#C47791]/60 bg-[#B85C78]/30 px-6 py-3 text-xs sm:text-sm sm:px-8 sm:py-4 font-semibold tracking-wider text-[#F3E4E9] backdrop-blur-md transition-all active:scale-95 duration-200 hover:bg-[#C47791] hover:border-[#D18BA2]/60 hover:text-white shadow-md"
           >
             View Projects
           </a>

@@ -46,12 +46,12 @@ export default function AllProjectsPage() {
           transition={{ duration: 0.8 }}
           className="mb-16"
         >
-          <h1 className="text-4xl md:text-6xl font-serif tracking-tighter text-slate-200">All Projects</h1>
+          <h1 className="font-editorial text-4xl md:text-6xl tracking-tighter text-[#F2EBDD]">All Projects</h1>
           <p className="mt-4 text-slate-400 text-lg">A complete archive of all short films, creative reels, and visual experiments.</p>
         </motion.div>
 
         <div className="mb-8 flex w-full justify-center" aria-label="Project categories">
-          <div className="grid w-full grid-cols-2 gap-2 rounded-xl border border-slate-800/70 bg-slate-950/40 p-2 backdrop-blur-sm md:flex md:w-auto md:items-center md:justify-center md:gap-1.5 md:rounded-full md:p-1.5">
+          <div className="grid w-full grid-cols-2 gap-2 rounded-xl border border-[#B85C78]/25 bg-slate-950/40 p-2 backdrop-blur-sm md:flex md:w-auto md:items-center md:justify-center md:gap-1.5 md:rounded-full md:p-1.5">
             {workCategories.map(category => (
               <button
                 key={category}
@@ -62,8 +62,8 @@ export default function AllProjectsPage() {
                   category === 'All Works' ? 'col-span-2 md:col-span-1' : ''
                 } ${
                   selectedCategory === category
-                    ? 'bg-slate-100 text-slate-950 shadow-[0_4px_18px_rgba(226,232,240,0.12)]'
-                    : 'bg-slate-900/30 text-slate-400 hover:bg-slate-800/70 hover:text-slate-200'
+                    ? 'bg-[#B85C78] text-white shadow-[0_4px_18px_rgba(169,79,109,0.18)] ring-1 ring-inset ring-[#D18BA2]/35'
+                    : 'bg-slate-900/30 text-slate-400 hover:bg-[#C47791]/20 hover:text-[#F3E4E9]'
                 }`}
               >
                 {category}

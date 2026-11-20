@@ -20,9 +20,9 @@ export default function SkillsSection() {
   ]
 
   return (
-    <section className="relative z-10 w-full overflow-hidden bg-transparent px-4 py-16 sm:py-20 lg:py-32 sm:px-6 lg:px-8 bg-slate-900/10">
+    <section className="brand-section-frame relative z-10 w-full overflow-hidden bg-transparent px-4 py-16 sm:py-20 lg:py-32 sm:px-6 lg:px-8 bg-slate-900/10">
       <div className="mx-auto max-w-7xl">
-        <h2 className="mb-16 font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-slate-100">Skills & Tools</h2>
+        <h2 className="editorial-heading-rule mb-16 font-serif font-editorial editorial-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl">Skills & Tools</h2>
         
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
           {categories.map((category) => (

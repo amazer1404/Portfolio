@@ -5,7 +5,7 @@ export default function AboutSection() {
     <section id="about" className="relative z-10 w-full overflow-hidden bg-transparent px-4 py-16 sm:py-20 lg:py-32 sm:px-6 lg:px-8 scroll-mt-12">
       <div className="mx-auto max-w-7xl">
         <div className="mb-16 max-w-2xl">
-          <h2 className="mb-6 font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-slate-100">About Me</h2>
+          <h2 className="font-serif font-editorial editorial-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl">About Me</h2>
         </div>
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-24">
           <div className="flex flex-col justify-center">

@@ -133,10 +133,10 @@ export default function MindAndObservations() {
       
       <div className="mx-auto max-w-7xl relative z-10">
         <div className="flex flex-col items-center mb-16 text-center">
-          <h2 className="mb-6 font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-slate-100 tracking-tight">
+          <h2 className="editorial-heading-centered mb-6 font-serif font-editorial editorial-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-tight">
             Mind & Observations
           </h2>
-          <div className="h-1 w-24 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full mb-6"></div>
+          <div className="mb-6 h-px w-12 rounded-full bg-[#C47791]/70"></div>
           <p className="text-xl text-slate-300 max-w-2xl font-light leading-relaxed mb-6">
             A space for the thoughts behind the work, observations, lessons, creative experiments, and ideas that shape how I approach storytelling.
           </p>

@@ -87,22 +87,24 @@ export default function FeaturedProjects() {
   };
 
   return (
-    <section id="projects" className="relative z-10 w-full bg-transparent px-4 py-16 sm:py-20 lg:py-32 sm:px-6 lg:px-8 scroll-mt-12">
+    <section id="projects" className="brand-section-frame relative z-10 w-full bg-transparent px-4 py-16 sm:py-20 lg:py-32 sm:px-6 lg:px-8 scroll-mt-12">
       <div className="mx-auto max-w-7xl">
         <div className="mb-20 flex flex-col justify-between md:flex-row md:items-end">
           <div className="max-w-2xl">
-            <h2 className="mb-6 font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl">MY KARMA.</h2>
+            <h2 className="editorial-heading-rule mb-6 font-serif font-editorial editorial-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
+              MY KARMA.
+            </h2>
             <p className="text-xl text-slate-400">
               A little piece of everything I've imagined, written and brought to life.
             </p>
           </div>
-          <Link href="/projects" className="mt-8 shrink-0 rounded-full border border-slate-800 bg-slate-900/50 px-8 py-3 text-sm font-medium text-slate-300 backdrop-blur-sm transition-colors hover:bg-slate-800 md:mt-0 md:self-end">
+          <Link href="/projects" className="mt-8 shrink-0 rounded-full border border-slate-800 bg-slate-900/50 px-8 py-3 text-sm font-medium text-slate-300 backdrop-blur-sm transition-colors hover:bg-slate-800 hover:underline decoration-[#B85C78] decoration-1 underline-offset-4 md:mt-0 md:self-end">
             View All Projects
           </Link>
         </div>
 
         <div className="mb-10 flex w-full justify-center" aria-label="Project categories">
-          <div className="grid w-full grid-cols-2 gap-2 rounded-xl border border-slate-800/70 bg-slate-950/40 p-2 backdrop-blur-sm md:flex md:w-auto md:items-center md:justify-center md:gap-1.5 md:rounded-full md:p-1.5">
+          <div className="grid w-full grid-cols-2 gap-2 rounded-xl border border-[#B85C78]/25 bg-slate-950/40 p-2 backdrop-blur-sm md:flex md:w-auto md:items-center md:justify-center md:gap-1.5 md:rounded-full md:p-1.5">
             {workCategories.map(category => (
               <button
                 key={category}
@@ -113,8 +115,8 @@ export default function FeaturedProjects() {
                   category === 'All Works' ? 'col-span-2 md:col-span-1' : ''
                 } ${
                   selectedCategory === category
-                    ? 'bg-slate-100 text-slate-950 shadow-[0_4px_18px_rgba(226,232,240,0.12)]'
-                    : 'bg-slate-900/30 text-slate-400 hover:bg-slate-800/70 hover:text-slate-200'
+                    ? 'bg-[#B85C78] text-white shadow-[0_4px_18px_rgba(169,79,109,0.18)] ring-1 ring-inset ring-[#D18BA2]/35'
+                    : 'bg-slate-900/30 text-slate-400 hover:bg-[#C47791]/20 hover:text-[#F3E4E9]'
                 }`}
               >
                 {category}
@@ -138,7 +140,7 @@ export default function FeaturedProjects() {
             title="Previous Projects"
             onClick={prevSlide}
             disabled={currentSlide === 0}
-            className={`absolute left-0 top-[35%] -translate-y-1/2 -ml-0 lg:-ml-6 z-20 flex h-12 w-12 items-center justify-center rounded-full bg-slate-900 border border-slate-700 text-white backdrop-blur shadow-xl transition-all duration-300 ${currentSlide === 0 ? 'opacity-0 pointer-events-none' : 'opacity-100 hover:bg-slate-800 hover:scale-110 active:scale-95'}`}
+            className={`absolute left-0 top-[35%] -translate-y-1/2 -ml-0 lg:-ml-6 z-20 flex h-12 w-12 items-center justify-center rounded-full bg-[#B85C78] border border-[#D18BA2]/25 text-white backdrop-blur shadow-xl transition-all duration-300 ${currentSlide === 0 ? 'opacity-0 pointer-events-none' : 'opacity-100 hover:bg-[#C47791] hover:border-[#F3E4E9]/40 hover:scale-110 active:scale-95'}`}
           >
             <motion.div
               animate={{ x: [0, -4, 0] }}
@@ -152,7 +154,7 @@ export default function FeaturedProjects() {
             title="Next Projects"
             onClick={nextSlide}
             disabled={currentSlide >= dotCount - 1} // Disable completely when at end
-            className={`absolute right-0 top-[35%] -translate-y-1/2 -mr-0 lg:-mr-6 z-20 flex h-12 w-12 items-center justify-center rounded-full bg-slate-900 border border-slate-700 text-white backdrop-blur shadow-xl transition-all duration-300 ${(currentSlide >= dotCount - 1 && dotCount > 0) ? 'opacity-0 pointer-events-none' : 'opacity-100 hover:bg-slate-800 hover:scale-110 active:scale-95 hover:shadow-[0_0_20px_-5px_rgba(255,255,255,0.2)]'}`}
+            className={`absolute right-0 top-[35%] -translate-y-1/2 -mr-0 lg:-mr-6 z-20 flex h-12 w-12 items-center justify-center rounded-full bg-[#B85C78] border border-[#D18BA2]/25 text-white backdrop-blur shadow-xl transition-all duration-300 ${(currentSlide >= dotCount - 1 && dotCount > 0) ? 'opacity-0 pointer-events-none' : 'opacity-100 hover:bg-[#C47791] hover:border-[#F3E4E9]/40 hover:scale-110 active:scale-95'}`}
           >
             <motion.div
               animate={{ x: [0, 4, 0] }}
