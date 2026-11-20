@@ -3,17 +3,17 @@
 
 import { useState, useRef, useEffect, useMemo } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { featuredProjects, workCategories, categoryVideos } from '@/data/projects'
+import { featuredProjects, workCategories } from '@/data/projects'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
+import CategoryVideoCarousel from '@/components/ui/CategoryVideoCarousel'
 
 export default function FeaturedProjects() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [dotCount, setDotCount] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState<(typeof workCategories)[number]>('All Works');
-  const [playingVideo, setPlayingVideo] = useState<string | null>(null);
 
   const filteredProjects = useMemo(() => {
     if (selectedCategory === 'All Works') return featuredProjects;
@@ -123,46 +123,8 @@ export default function FeaturedProjects() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.35 }}
-            className="flex w-full gap-3 overflow-x-auto snap-x snap-mandatory pb-3 scrollbar-hide sm:grid sm:grid-cols-2 sm:overflow-visible sm:pb-0 lg:grid-cols-3 sm:gap-4 md:gap-6"
           >
-            {categoryVideos
-              .filter(video => video.categories.includes(selectedCategory))
-              .map((video, index) => (
-                <motion.div
-                  key={video.id}
-                  initial={{ opacity: 0, y: 18 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.45, delay: index * 0.07 }}
-                  className="relative aspect-video w-[82vw] max-w-[280px] shrink-0 snap-start overflow-hidden rounded-xl border border-slate-800/60 bg-slate-900 shadow-xl sm:w-auto sm:max-w-none sm:shrink sm:snap-none"
-                >
-                  {playingVideo === video.id ? (
-                    <iframe
-                      src={`https://www.youtube.com/embed/${video.id}?autoplay=1&rel=0&modestbranding=1&playsinline=1`}
-                      className="absolute inset-0 h-full w-full border-0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                      allowFullScreen
-                      title={video.title}
-                    />
-                  ) : (
-                    <button
-                      type="button"
-                      onClick={() => setPlayingVideo(video.id)}
-                      className="group absolute inset-0 flex items-center justify-center focus:outline-none"
-                      aria-label={`Play ${video.title}`}
-                    >
-                      <img
-                        src={`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`}
-                        alt={video.title}
-                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                      />
-                      <span className="absolute inset-0 bg-slate-950/10 transition-colors group-hover:bg-slate-950/25" />
-                      <span className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full border border-white/20 bg-black/40 backdrop-blur-sm transition-transform duration-300 group-hover:scale-110">
-                        <svg className="ml-1 h-7 w-7 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
-                      </span>
-                    </button>
-                  )}
-                </motion.div>
-              ))}
+            <CategoryVideoCarousel category={selectedCategory} />
           </motion.div>
         ) : (
         <div className="relative">
