@@ -1,19 +1,24 @@
 'use client';
 
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowLeft } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { featuredProjects, workCategories } from '@/data/projects';
+import { allCategoryVideos, allWorksProjects, featuredProjects, workCategories } from '@/data/projects';
 import CategoryVideoCarousel from '@/components/ui/CategoryVideoCarousel';
 import BackToTop from '@/components/ui/BackToTop';
 
 export default function AllProjectsPage() {
   const [selectedCategory, setSelectedCategory] = useState<(typeof workCategories)[number]>('All Works');
+  const [playingVideo, setPlayingVideo] = useState<string | null>(null);
   const filteredProjects = useMemo(() => {
-    if (selectedCategory === 'All Works') return featuredProjects;
+    if (selectedCategory === 'All Works') return allWorksProjects;
     return featuredProjects.filter(project => project.workCategory === selectedCategory);
+  }, [selectedCategory]);
+
+  useEffect(() => {
+    setPlayingVideo(null);
   }, [selectedCategory]);
 
   return (
@@ -123,6 +128,54 @@ export default function AllProjectsPage() {
                 </div>
               </motion.div>
             </Link>
+          ))}
+          {selectedCategory === 'All Works' && allCategoryVideos.map((video, index) => (
+            <motion.div
+              key={`video-${video.id}`}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: (filteredProjects.length + index) * 0.05 }}
+              className="group flex flex-col md:flex-row items-center gap-6 p-4 rounded-2xl bg-zinc-900/20 border border-zinc-800/40 hover:bg-zinc-800/40 hover:border-zinc-700/50 transition-all duration-300"
+            >
+              <div className="relative w-full md:w-64 aspect-video shrink-0 rounded-xl overflow-hidden bg-slate-900 border border-slate-800/50">
+                {playingVideo === video.id ? (
+                  <iframe
+                    src={`https://www.youtube.com/embed/${video.id}?autoplay=1&rel=0&modestbranding=1&playsinline=1`}
+                    className="absolute inset-0 h-full w-full border-0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                    title={video.title}
+                  />
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => setPlayingVideo(video.id)}
+                    className="group absolute inset-0 flex items-center justify-center focus:outline-none"
+                    aria-label={`Play ${video.title}`}
+                  >
+                    <img
+                      src={`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`}
+                      alt={video.title}
+                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    />
+                    <span className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                    <span className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-black/40 backdrop-blur-sm transition-transform duration-300 group-hover:scale-110">
+                      <svg className="ml-1 h-7 w-7 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+                    </span>
+                  </button>
+                )}
+              </div>
+              <div className="flex-1 flex flex-col justify-center min-w-0">
+                <div className="flex items-center gap-3 text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-blue-400/80 mb-2">
+                  <span>{video.categories.join(' / ')}</span>
+                  <span className="h-1 w-1 rounded-full bg-slate-700" />
+                  <span>YouTube Video</span>
+                </div>
+                <h3 className="text-2xl sm:text-3xl font-serif text-slate-200 mb-2 group-hover:text-blue-400 transition-colors truncate">
+                  {video.title}
+                </h3>
+              </div>
+            </motion.div>
           ))}
         </motion.div>
         )}

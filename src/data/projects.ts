@@ -21,6 +21,10 @@ export const categoryVideos = [
   { id: 'YxNqsOOL2kY', title: 'Client Short', categories: ['Clients & Assignments'] }
 ];
 
+export const allCategoryVideos = Array.from(
+  new Map(categoryVideos.map(video => [video.id, video])).values()
+);
+
 export const featuredProjects = [
   {
     id: "shiuli-the-october-story",
@@ -133,3 +137,8 @@ export const featuredProjects = [
     tags: ["Music Visualization", "Experimental Reel", "Editor", "Director"],
   },
 ]
+
+export const allWorksProjects = [
+  ...featuredProjects.filter(project => project.workCategory === 'Short Films & Sketches'),
+  ...featuredProjects.filter(project => project.workCategory !== 'Short Films & Sketches'),
+];

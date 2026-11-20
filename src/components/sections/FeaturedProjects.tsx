@@ -3,7 +3,7 @@
 
 import { useState, useRef, useEffect, useMemo } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { featuredProjects, workCategories } from '@/data/projects'
+import { allCategoryVideos, allWorksProjects, featuredProjects, workCategories } from '@/data/projects'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
@@ -14,9 +14,10 @@ export default function FeaturedProjects() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [dotCount, setDotCount] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState<(typeof workCategories)[number]>('All Works');
+  const [playingVideo, setPlayingVideo] = useState<string | null>(null);
 
   const filteredProjects = useMemo(() => {
-    if (selectedCategory === 'All Works') return featuredProjects;
+    if (selectedCategory === 'All Works') return allWorksProjects;
     return featuredProjects.filter(project =>
       project.workCategory === selectedCategory
     );
@@ -49,7 +50,11 @@ export default function FeaturedProjects() {
       clearTimeout(timeoutId);
       window.removeEventListener('resize', updateDots);
     };
-  }, [filteredProjects.length]);
+  }, [filteredProjects.length, selectedCategory]);
+
+  useEffect(() => {
+    setPlayingVideo(null);
+  }, [selectedCategory]);
 
   const handleScroll = () => {
     if (containerRef.current) {
@@ -221,6 +226,60 @@ export default function FeaturedProjects() {
                     </div>
                   </motion.div>
                 </Link>
+              </motion.div>
+            ))}
+            {selectedCategory === 'All Works' && allCategoryVideos.map((video, index) => (
+              <motion.div
+                layout
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.35, ease: 'easeOut' }}
+                key={`video-${video.id}`}
+                className="w-full shrink-0 snap-start flex flex-col h-full"
+              >
+                <div className="group flex flex-col h-full">
+                  <div className="relative flex flex-col gap-4 h-full">
+                    <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-slate-900 border border-slate-800/50 transition-all duration-500 group-hover:border-blue-500/50 group-hover:shadow-[0_0_40px_-10px_rgba(59,130,246,0.4)]">
+                      {playingVideo === video.id ? (
+                        <iframe
+                          src={`https://www.youtube.com/embed/${video.id}?autoplay=1&rel=0&modestbranding=1&playsinline=1`}
+                          className="absolute inset-0 h-full w-full border-0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                          allowFullScreen
+                          title={video.title}
+                        />
+                      ) : (
+                        <button
+                          type="button"
+                          onClick={() => setPlayingVideo(video.id)}
+                          className="group absolute inset-0 flex items-center justify-center focus:outline-none"
+                          aria-label={`Play ${video.title}`}
+                        >
+                          <img
+                            src={`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`}
+                            alt={video.title}
+                            className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                          />
+                          <span className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                          <span className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-black/40 backdrop-blur-sm transition-transform duration-300 group-hover:scale-110 sm:h-14 sm:w-14">
+                            <svg className="ml-1 h-7 w-7 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+                          </span>
+                        </button>
+                      )}
+                    </div>
+                    <div className="flex flex-col gap-2">
+                      <div className="flex items-center gap-2 text-[10px] sm:text-xs font-medium uppercase tracking-wider text-slate-400">
+                        <span>{video.categories.join(' / ')}</span>
+                        <span className="h-1 w-1 rounded-full bg-slate-600" />
+                        <span>YouTube Video</span>
+                      </div>
+                      <h3 className="font-serif text-lg sm:text-xl md:text-2xl transition-colors group-hover:text-slate-300">
+                        {video.title}
+                      </h3>
+                    </div>
+                  </div>
+                </div>
               </motion.div>
             ))}
             </AnimatePresence>

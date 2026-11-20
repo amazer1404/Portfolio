@@ -37,18 +37,18 @@ export default function TheQuietQuitPage() {
       </nav>
 
       {/* 1. Main Playable Video Section */}
-      <section className="relative flex flex-col items-center justify-center min-h-screen pt-20 px-4 sm:px-6 lg:px-8">
+      <section className="relative flex flex-col items-center justify-center min-h-[90vh] pt-24 pb-16 px-4 sm:px-6 lg:px-8">
         
         {/* Subtle ambient glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vh] bg-blue-900/10 rounded-full blur-[120px] pointer-events-none" />
 
-        <div className="relative z-10 flex flex-col items-center w-full max-w-6xl mx-auto mt-12">
+        <div className="relative z-10 flex flex-col items-center w-full max-w-6xl mx-auto mt-8">
           {/* Header */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: 'easeOut' }}
-            className="text-center mb-12"
+            className="text-center mb-8"
           >
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif tracking-tight mb-6 text-white drop-shadow-lg">
               The Quiet Quit
@@ -58,22 +58,45 @@ export default function TheQuietQuitPage() {
             </p>
           </motion.div>
 
-          {/* Video Player */}
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.3, ease: 'easeOut' }}
-            className="w-full aspect-video bg-[#0a0a0a] border border-white/5 rounded-xl shadow-2xl relative overflow-hidden"
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.2, ease: 'easeOut' }}
+            className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 w-full"
           >
-            <iframe 
-              className="w-full h-full"
-              src="https://www.youtube.com/embed/1iD31A5zWxw?si=WDZ6G7ZqWAeTzMaX" 
-              title="The Quiet Quit" 
-              frameBorder="0" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-              referrerPolicy="strict-origin-when-cross-origin" 
-              allowFullScreen
-            ></iframe>
+            <div>
+              <p className="mb-3 text-center text-xs md:text-sm font-medium tracking-[0.16em] uppercase text-slate-300">
+                Watch Short Film
+              </p>
+              <div className="relative aspect-video rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(34,211,238,0.08)] group border border-slate-700/50 bg-[#020202]">
+                <iframe
+                  className="w-full h-full"
+                  src="https://www.youtube.com/embed/1iD31A5zWxw?si=WDZ6G7ZqWAeTzMaX"
+                  title="The Quiet Quit Short Film"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                />
+              </div>
+            </div>
+
+            <div>
+              <p className="mb-3 text-center text-xs md:text-sm font-medium tracking-[0.16em] uppercase text-slate-300">
+                Watch Official Trailer
+              </p>
+              <div className="relative aspect-video rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(148,163,184,0.08)] group border border-slate-700/50 bg-[#020202]">
+                <iframe
+                  className="w-full h-full"
+                  src="https://www.youtube.com/embed/nglQ4rHnyys"
+                  title="The Quiet Quit Official Trailer"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                />
+              </div>
+            </div>
           </motion.div>
         </div>
       </section>

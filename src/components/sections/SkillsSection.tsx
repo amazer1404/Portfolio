@@ -11,11 +11,11 @@ export default function SkillsSection() {
     },
     {
       title: "Creative Skills",
-      skills: ["Creative Direction", "Storytelling", "Content Planning", "Performance Direction", "Cinematic Editing", "Color Grading", "Visual Direction", "Concept Ideation"]
+      skills: ["Creative Direction", "Storytelling", "Content Planning", "Performance Direction", "Cinematic Editing", "Color Grading", "Visual Direction", "Concept Ideation", "Story Writing"]
     },
     {
       title: "AI Tools",
-      skills: ["Kling AI", "Veo", "Mango Banana", "AI-assisted VFX", "AI-assisted visual workflows"]
+      skills: ["Kling AI", "Veo", "Mango Banana", "AI-assisted VFX", "AI-assisted visual workflows", "Higgsfield", "OpenArt", "Gemini AI"]
     }
   ]
 
