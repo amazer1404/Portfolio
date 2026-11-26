@@ -58,14 +58,14 @@ export default function ReelsShowcase() {
   };
 
   return (
-    <section id="reels" className="relative z-10 w-full overflow-hidden bg-transparent px-4 py-16 sm:py-20 lg:py-32 sm:px-6 lg:px-8 scroll-mt-12">
+    <section id="reels" className="relative z-10 w-full overflow-hidden bg-transparent px-4 py-12 sm:py-20 lg:py-32 sm:px-6 lg:px-8 scroll-mt-12">
       <div className="mx-auto max-w-7xl">
-        <div className="flex flex-col items-center mb-16 text-center">
-          <h2 className="editorial-heading-centered mb-6 font-serif font-editorial editorial-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-tight">
+        <div className="mb-10 flex flex-col items-center text-center sm:mb-16">
+          <h2 className="editorial-heading-centered mb-4 font-serif font-editorial editorial-heading text-3xl sm:mb-6 sm:text-4xl md:text-5xl lg:text-6xl tracking-tight">
             Cinematic Reels
           </h2>
-          <div className="mb-6 h-px w-12 rounded-full bg-[#C47791]/70"></div>
-          <p className="text-xl text-slate-300 max-w-2xl font-light leading-relaxed mb-6">
+          <div className="mb-4 h-px w-12 rounded-full bg-[#C47791]/70 sm:mb-6"></div>
+          <p className="mb-4 max-w-2xl text-xl font-light leading-relaxed text-slate-300 sm:mb-6">
             Short-form content crafted with cinematic pacing, precise audio, and strong emotional pulls.
           </p>
         </div>

@@ -3,21 +3,26 @@
 
 import { useState, useRef, useEffect, useMemo } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { allCategoryVideos, allWorksProjects, featuredProjects, workCategories } from '@/data/projects'
+import { featuredProjects } from '@/data/projects'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import CategoryVideoCarousel from '@/components/ui/CategoryVideoCarousel'
 
+const featuredCategories = [
+  'Short Films & Sketches',
+  'AI Videos',
+  'Visual Feasts',
+  'Clients & Assignments',
+] as const
+
 export default function FeaturedProjects() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [dotCount, setDotCount] = useState(0);
-  const [selectedCategory, setSelectedCategory] = useState<(typeof workCategories)[number]>('All Works');
-  const [playingVideo, setPlayingVideo] = useState<string | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<(typeof featuredCategories)[number]>('Short Films & Sketches');
 
   const filteredProjects = useMemo(() => {
-    if (selectedCategory === 'All Works') return allWorksProjects;
     return featuredProjects.filter(project =>
       project.workCategory === selectedCategory
     );
@@ -52,10 +57,6 @@ export default function FeaturedProjects() {
     };
   }, [filteredProjects.length, selectedCategory]);
 
-  useEffect(() => {
-    setPlayingVideo(null);
-  }, [selectedCategory]);
-
   const handleScroll = () => {
     if (containerRef.current) {
       const scrollPosition = containerRef.current.scrollLeft;
@@ -87,9 +88,9 @@ export default function FeaturedProjects() {
   };
 
   return (
-    <section id="projects" className="brand-section-frame relative z-10 w-full bg-transparent px-4 py-16 sm:py-20 lg:py-32 sm:px-6 lg:px-8 scroll-mt-12">
+    <section id="projects" className="brand-section-frame relative z-10 w-full bg-transparent px-4 py-12 sm:py-20 lg:py-32 sm:px-6 lg:px-8 scroll-mt-12">
       <div className="mx-auto max-w-7xl">
-        <div className="mb-20 flex flex-col justify-between md:flex-row md:items-end">
+        <div className="mb-12 flex flex-col justify-between sm:mb-20 md:flex-row md:items-end">
           <div className="max-w-2xl">
             <h2 className="editorial-heading-rule mb-6 font-serif font-editorial editorial-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
               MY KARMA.
@@ -98,22 +99,20 @@ export default function FeaturedProjects() {
               A little piece of everything I've imagined, written and brought to life.
             </p>
           </div>
-          <Link href="/projects" className="mt-8 shrink-0 rounded-full border border-slate-800 bg-slate-900/50 px-8 py-3 text-sm font-medium text-slate-300 backdrop-blur-sm transition-colors hover:bg-slate-800 hover:underline decoration-[#B85C78] decoration-1 underline-offset-4 md:mt-0 md:self-end">
+          <Link href="/projects" className="mt-6 shrink-0 rounded-full border border-[#D18BA2]/40 bg-[#B85C78]/20 px-6 py-3 text-sm font-semibold text-[#F3E4E9] shadow-[0_4px_18px_rgba(169,79,109,0.12)] backdrop-blur-md transition-all duration-300 hover:border-[#D18BA2]/70 hover:bg-[#B85C78]/35 hover:text-white hover:shadow-[0_6px_22px_rgba(169,79,109,0.22)] sm:mt-8 md:mt-0 md:self-end">
             View All Projects
           </Link>
         </div>
 
-        <div className="mb-10 flex w-full justify-center" aria-label="Project categories">
+        <div className="mb-8 flex w-full justify-center sm:mb-10" aria-label="Project categories">
           <div className="grid w-full grid-cols-2 gap-2 rounded-xl border border-[#B85C78]/25 bg-slate-950/40 p-2 backdrop-blur-sm md:flex md:w-auto md:items-center md:justify-center md:gap-1.5 md:rounded-full md:p-1.5">
-            {workCategories.map(category => (
+            {featuredCategories.map(category => (
               <button
                 key={category}
                 type="button"
                 onClick={() => setSelectedCategory(category)}
                 aria-pressed={selectedCategory === category}
                 className={`min-h-10 min-w-0 rounded-lg px-2 py-2 text-center text-xs font-medium leading-tight transition-all duration-300 md:rounded-full md:px-3 lg:px-4 md:text-sm ${
-                  category === 'All Works' ? 'col-span-2 md:col-span-1' : ''
-                } ${
                   selectedCategory === category
                     ? 'bg-[#B85C78] text-white shadow-[0_4px_18px_rgba(169,79,109,0.18)] ring-1 ring-inset ring-[#D18BA2]/35'
                     : 'bg-slate-900/30 text-slate-400 hover:bg-[#C47791]/20 hover:text-[#F3E4E9]'
@@ -228,60 +227,6 @@ export default function FeaturedProjects() {
                     </div>
                   </motion.div>
                 </Link>
-              </motion.div>
-            ))}
-            {selectedCategory === 'All Works' && allCategoryVideos.map((video, index) => (
-              <motion.div
-                layout
-                initial={{ opacity: 0, y: 18 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -12 }}
-                transition={{ duration: 0.35, ease: 'easeOut' }}
-                key={`video-${video.id}`}
-                className="w-full shrink-0 snap-start flex flex-col h-full"
-              >
-                <div className="group flex flex-col h-full">
-                  <div className="relative flex flex-col gap-4 h-full">
-                    <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-slate-900 border border-slate-800/50 transition-all duration-500 group-hover:border-blue-500/50 group-hover:shadow-[0_0_40px_-10px_rgba(59,130,246,0.4)]">
-                      {playingVideo === video.id ? (
-                        <iframe
-                          src={`https://www.youtube.com/embed/${video.id}?autoplay=1&rel=0&modestbranding=1&playsinline=1`}
-                          className="absolute inset-0 h-full w-full border-0"
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                          allowFullScreen
-                          title={video.title}
-                        />
-                      ) : (
-                        <button
-                          type="button"
-                          onClick={() => setPlayingVideo(video.id)}
-                          className="group absolute inset-0 flex items-center justify-center focus:outline-none"
-                          aria-label={`Play ${video.title}`}
-                        >
-                          <img
-                            src={`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`}
-                            alt={video.title}
-                            className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                          />
-                          <span className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                          <span className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-black/40 backdrop-blur-sm transition-transform duration-300 group-hover:scale-110 sm:h-14 sm:w-14">
-                            <svg className="ml-1 h-7 w-7 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
-                          </span>
-                        </button>
-                      )}
-                    </div>
-                    <div className="flex flex-col gap-2">
-                      <div className="flex items-center gap-2 text-[10px] sm:text-xs font-medium uppercase tracking-wider text-slate-400">
-                        <span>{video.categories.join(' / ')}</span>
-                        <span className="h-1 w-1 rounded-full bg-slate-600" />
-                        <span>YouTube Video</span>
-                      </div>
-                      <h3 className="font-serif text-lg sm:text-xl md:text-2xl transition-colors group-hover:text-slate-300">
-                        {video.title}
-                      </h3>
-                    </div>
-                  </div>
-                </div>
               </motion.div>
             ))}
             </AnimatePresence>

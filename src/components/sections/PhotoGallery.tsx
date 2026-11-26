@@ -11,13 +11,13 @@ export default function PhotoGallery({ images }: PhotoGalleryProps) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <section id="gallery" className="relative z-10 w-full overflow-hidden bg-transparent px-4 py-16 sm:py-20 lg:py-32 sm:px-6 lg:px-8 scroll-mt-12">
+    <section id="gallery" className="relative z-10 w-full overflow-hidden bg-transparent px-4 py-12 sm:py-20 lg:py-32 sm:px-6 lg:px-8 scroll-mt-12">
       <div className="mx-auto max-w-7xl">
-        <h2 className="mb-6 font-serif font-editorial editorial-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-tight">
+        <h2 className="mb-4 font-serif font-editorial editorial-heading text-3xl sm:mb-6 sm:text-4xl md:text-5xl lg:text-6xl tracking-tight">
           Photo Gallery
         </h2>
-        <div className="mb-6 h-px w-12 rounded-full bg-[#C47791]/70"></div>
-        <p className="mb-12 lg:mb-16 text-xl text-slate-300 max-w-2xl font-light">
+        <div className="mb-4 h-px w-12 rounded-full bg-[#C47791]/70 sm:mb-6"></div>
+        <p className="mb-8 max-w-2xl text-xl font-light text-slate-300 sm:mb-12 lg:mb-16">
           Behind-the-scenes, editing workflows, and cinematic stills.
         </p>
 

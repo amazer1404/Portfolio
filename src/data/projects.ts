@@ -34,7 +34,7 @@ export const featuredProjects = [
     year: "2026",
     role: "Writer, Director, Editor",
     description: "An emotionally engaging romantic short film built from an original story and screenplay I conceptualised and wrote. Its almost dialogue-free narrative translates love, memory, and loss into visual storytelling, concluding with one meaningful line.",
-    thumbnail: "/images/gallery/shiuli-the-october-story/WhatsApp Image 2026-11-06 at 1.57.48 PM.jpeg",
+    thumbnail: "/images/gallery/shiuli-the-october-story/shiuli-thumbnail.jpeg",
     tags: ["Story Writing", "Screenwriting", "Scriptwriting", "Narrative Development", "Visual Storytelling", "Direction", "Video Editing", "Cinematography", "Creative Direction"],
   },
   {

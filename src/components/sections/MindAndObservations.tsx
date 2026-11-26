@@ -127,17 +127,17 @@ export default function MindAndObservations() {
   }, [selectedBlog]);
 
   return (
-    <section id="mind" className="relative z-10 w-full overflow-hidden bg-transparent px-4 py-16 sm:py-20 lg:py-32 sm:px-6 lg:px-8 bg-slate-900/10 scroll-mt-12">
+    <section id="mind" className="relative z-10 w-full overflow-hidden bg-transparent px-4 py-12 sm:py-20 lg:py-32 sm:px-6 lg:px-8 bg-slate-900/10 scroll-mt-12">
       {/* Background Ambience */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(30,41,59,0.5),transparent_70%)] opacity-50 mix-blend-screen" />
       
       <div className="mx-auto max-w-7xl relative z-10">
-        <div className="flex flex-col items-center mb-16 text-center">
-          <h2 className="editorial-heading-centered mb-6 font-serif font-editorial editorial-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-tight">
+        <div className="mb-10 flex flex-col items-center text-center sm:mb-16">
+          <h2 className="editorial-heading-centered mb-4 font-serif font-editorial editorial-heading text-3xl sm:mb-6 sm:text-4xl md:text-5xl lg:text-6xl tracking-tight">
             Mind & Observations
           </h2>
-          <div className="mb-6 h-px w-12 rounded-full bg-[#C47791]/70"></div>
-          <p className="text-xl text-slate-300 max-w-2xl font-light leading-relaxed mb-6">
+          <div className="mb-4 h-px w-12 rounded-full bg-[#C47791]/70 sm:mb-6"></div>
+          <p className="mb-4 max-w-2xl text-xl font-light leading-relaxed text-slate-300 sm:mb-6">
             A space for the thoughts behind the work, observations, lessons, creative experiments, and ideas that shape how I approach storytelling.
           </p>
         </div>

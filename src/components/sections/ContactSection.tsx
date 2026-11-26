@@ -2,13 +2,13 @@ import { Mail } from 'lucide-react';
 
 export default function ContactSection() {
   return (
-    <section id="contact" className="relative z-10 flex min-h-[50vh] w-full flex-col justify-center overflow-hidden bg-transparent px-4 py-16 sm:py-20 lg:py-32 sm:px-6 lg:px-8">
+    <section id="contact" className="relative z-10 flex min-h-[50vh] w-full flex-col justify-center overflow-hidden bg-transparent px-4 py-12 sm:py-20 lg:py-32 sm:px-6 lg:px-8">
       <div className="mx-auto flex w-full max-w-4xl flex-col items-center justify-center text-center">
         <h2 className="editorial-heading-centered mb-6 font-serif font-editorial editorial-heading text-3xl font-medium tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">
           Let's create something memorable.
         </h2>
         
-        <p className="mb-12 max-w-xl text-lg text-slate-400">
+        <p className="mb-8 max-w-xl text-lg text-slate-400 sm:mb-12">
           Follow my journey and watch more of my recent work, or drop a line if you have an exciting project in mind.
         </p>
 

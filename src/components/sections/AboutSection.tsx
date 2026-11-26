@@ -2,13 +2,22 @@ import Image from 'next/image'
 
 export default function AboutSection() {
   return (
-    <section id="about" className="relative z-10 w-full overflow-hidden bg-transparent px-4 py-16 sm:py-20 lg:py-32 sm:px-6 lg:px-8 scroll-mt-12">
+    <section id="about" className="relative z-10 w-full overflow-hidden bg-transparent px-4 py-12 sm:py-20 lg:py-32 sm:px-6 lg:px-8 scroll-mt-12">
       <div className="mx-auto max-w-7xl">
-        <div className="mb-16 max-w-2xl">
-          <h2 className="font-serif font-editorial editorial-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl">About Me</h2>
-        </div>
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-24">
-          <div className="flex flex-col justify-center">
+        <div className="grid grid-cols-1 gap-6 sm:gap-12 lg:grid-cols-2 lg:gap-x-24 lg:gap-y-0">
+          <div className="mb-0 max-w-2xl sm:order-1 sm:mb-4 lg:col-span-2 lg:row-start-1 lg:mb-16">
+            <h2 className="font-serif font-editorial editorial-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl">About Me</h2>
+          </div>
+          <div className="relative aspect-square w-full overflow-hidden rounded-xl bg-slate-900 border border-slate-800/80 shadow-lg sm:order-3 lg:col-start-2 lg:row-start-2 md:aspect-[4/3] lg:aspect-[3/4]">
+            <Image
+              src="/images/gallery/about_me_photo.png"
+              alt="Karan Pawar"
+              fill
+              className="object-cover transition-transform duration-700 hover:scale-105 hover:brightness-110"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
+          </div>
+          <div className="flex flex-col justify-center sm:order-2 lg:col-start-1 lg:row-start-2">
             <ul className="space-y-6 text-lg lg:text-xl text-slate-300 font-light">
               <li className="flex items-start gap-4">
                 <span className="mt-1.5 flex h-2 w-2 shrink-0 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.8)]"></span>
@@ -31,15 +40,6 @@ export default function AboutSection() {
                 <p><strong className="font-medium text-slate-100">Beyond the Edit Bay:</strong> When I'm not cutting video, I'm usually diving into modern media, podcasts, spiritual literature, or learning about the cosmos.</p>
               </li>
             </ul>
-          </div>
-          <div className="relative aspect-square w-full md:aspect-[4/3] lg:aspect-[3/4] overflow-hidden rounded-xl bg-slate-900 border border-slate-800/80 shadow-lg">
-            <Image
-              src="/images/gallery/about_me_photo.png"
-              alt="Karan Pawar"
-              fill
-              className="object-cover transition-transform duration-700 hover:scale-105 hover:brightness-110"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-            />
           </div>
         </div>
       </div>
