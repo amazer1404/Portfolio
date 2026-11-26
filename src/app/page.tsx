@@ -5,7 +5,6 @@ import HeroSection from '@/components/sections/HeroSection'
 import AboutSection from '@/components/sections/AboutSection'
 import SkillsSection from '@/components/sections/SkillsSection'
 import FeaturedProjects from '@/components/sections/FeaturedProjects'
-import ReelsShowcase from '@/components/sections/ReelsShowcase'
 import PhotoGallery from '@/components/sections/PhotoGallery'
 import MindAndObservations from '@/components/sections/MindAndObservations'
 import WorkExperience from '@/components/sections/WorkExperience'
@@ -47,19 +46,16 @@ export default function Home() {
       {/* 4. Featured Projects */}
       <FeaturedProjects />
 
-      {/* 5. Reels Showcase */}
-      <ReelsShowcase />
-
-      {/* 6. Work Experience */}
+      {/* 5. Work Experience */}
       <WorkExperience />
 
-      {/* 7. Photo Gallery */}
+      {/* 6. Photo Gallery */}
       <PhotoGallery images={galleryImages} />
 
-      {/* 8. Mind & Observations */}
+      {/* 7. Mind & Observations */}
       <MindAndObservations />
 
-      {/* 9. Let's Connect (CTA) */}
+      {/* 8. Let's Connect (CTA) */}
       <ContactSection />
 
       {/* 9. Footer */}
